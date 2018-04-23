@@ -14,5 +14,7 @@
  - [ ] 动画bug<br/>
  - [ ] 其他<br/>
 
+只能ios，使用android接口被拒绝403...
+
  #iOS效果截图:<br/>
  ![image](https://github.com/cosyer/rn-music/blob/master/video1.gif) <br/>

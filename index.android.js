@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import Main from './main'
 
-GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest
+// GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest
 // 不提示 warning
 console.disableYellowBox = true;
 

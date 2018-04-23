@@ -25,7 +25,7 @@ var lyrObj = []   // 存放歌词
 var myAnimate;
 const allList = 'http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.billboard.billList&type=2&size=10&offset=0'    //总列表
 const lyrFile = 'http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.lry'   //歌词文件
-const start = 'http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play'   //播放
+const startPlay = 'http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play'   //播放
 
 export default class Main extends Component {
 
@@ -238,25 +238,37 @@ export default class Main extends Component {
 
     loadSongInfo = (index) => {
         //加载歌曲
-        let songid = this.state.songs[index]
-        let url = 'http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid=' + songid
-        fetch(url)
-            .then((response) => response.json())
-            .then((responseJson) => {
-                let songinfo = responseJson.songinfo
-                let bitrate = responseJson.bitrate
-                this.setState({
-                    pic_small: songinfo.pic_small, //小图
-                    pic_big: songinfo.pic_big,  //大图
-                    title: songinfo.title,     //歌曲名
-                    author: songinfo.author,   //歌手
-                    file_link: bitrate.file_link,   //播放链接
-                    file_duration: bitrate.file_duration //歌曲长度
-                })
-            }).catch(error => {
-                console.log(error)
-            })
+        // let songid = this.state.songs[index]
+        // let url = 'http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.play&songid=' + songid
+        // fetch(url)
+        //     .then((response) => response.json())
+        //     .then((responseJson) => {
+        //         let songinfo = responseJson.songinfo
+        //         let bitrate = responseJson.bitrate
+        //         this.setState({
+        //             pic_small: songinfo.pic_small, //小图
+        //             pic_big: songinfo.pic_big,  //大图
+        //             title: songinfo.title,     //歌曲名
+        //             author: songinfo.author,   //歌手
+        //             file_link: bitrate.file_link,   //播放链接
+        //             file_duration: bitrate.file_duration //歌曲长度
+        //         })
+        //     }).catch(error => {
+        //         console.log(error)
+        //     })
 
+        webapi.get(startPlay, { songid }, (data) => {
+            let songinfo = data.songinfo
+            let bitrate = data.bitrate
+            this.setState({
+                pic_small: songinfo.pic_small, //小图
+                pic_big: songinfo.pic_big,  //大图
+                title: songinfo.title,     //歌曲名
+                author: songinfo.author,   //歌手
+                file_link: bitrate.file_link,   //播放链接
+                file_duration: bitrate.file_duration //歌曲长度
+            })
+        })
 
         //加载歌词
         // let url1 = 'http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.song.lry&songid=' + songid
@@ -296,6 +308,7 @@ export default class Main extends Component {
         //     }).catch(error => {
         //         console.log(error)
         //     })
+
         webapi.get(lyrFile, { songid }, (data) => {
             let lry = data.lrcContent
             let lryAry = lry.split('\n')   //按照换行符切数组
@@ -346,6 +359,7 @@ export default class Main extends Component {
         //     }).catch(error => {
         //         console.log(error)
         //     })
+
         webapi.get(allList, {}, (data) => {
             this.backMethod(data)
         })
