@@ -1,5 +1,6 @@
-# react-native-videoDemo  <br/>
+# react-native-music  <br/>
 使用react native制作的一款网络音乐播放器 <br/>
+基于Fetch封装网络请求
 基于第三方库 [ react-native-video ]( https://github.com/react-native-community/react-native-video ) 设计<br/>
 "react-native-video": "^1.0.0"   <br/>
 
@@ -11,7 +12,6 @@
  - [x] 播放时间<br/>
  - [x] 基本旋转动画<br/>
  - [ ] 动画bug<br/>
- - [ ] 安卓就是个残废,亲生的和捡来的差别太大了<br/>
  - [ ] 其他<br/>
 
  #iOS效果截图:<br/>
